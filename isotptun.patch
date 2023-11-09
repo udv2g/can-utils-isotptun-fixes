@@ -1,0 +1,20 @@
+diff --git a/isotptun.c b/isotptun.c
+index 2a39ea7..15479f1 100644
+--- a/isotptun.c
++++ b/isotptun.c
+@@ -370,10 +370,12 @@ int main(int argc, char **argv)
+ 			nbytes = read(s, buffer, BUF_LEN);
+ 			if (nbytes < 0) {
+ 				perror_syslog("read isotp socket");
+-				return -1;
++				continue;
++			}
++			if (nbytes > MAX_PDU_LENGTH){
++				syslogger(LOG_ERR, "Recived data exceeds max PDU length");
++				continue;
+ 			}
+-			if (nbytes > MAX_PDU_LENGTH)
+-				return -1;
+ 			ret = write(t, buffer, nbytes);
+ 			if (verbose) {
+ 				if (ret < 0 && errno == EAGAIN)
