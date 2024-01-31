@@ -2,7 +2,7 @@
 <img src="https://github.com/linux-can/can-logos/raw/master/png/SocketCAN-logo-60dpi.png" alt="SocketCAN logo"/>
 </p>
 
-### SocketCAN userspace utilities and tools
+### SocketCAN userspace utilities and tools (Updated for J3271 Megawatt Charging)
 
 This repository contains some userspace utilities for Linux CAN
 subsystem (aka SocketCAN):
