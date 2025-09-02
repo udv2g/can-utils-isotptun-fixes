@@ -14,7 +14,8 @@ Changes were made in the patches to prevent crashing due to lack of event handli
 
 ##### Prerequisites
 
-`sudo apt install git && sudo apt-get install autoconf
+```
+sudo apt install git && sudo apt-get install autoconf
 sudo apt-get install libtool
 sudo apt install make iptables
 git clone https://github.com/udv2g/can-utils-isotptun-fixes/
@@ -23,7 +24,8 @@ git apply isotptun.patch
 ./autogen.sh
 ./configure
 make
-sudo make install`
+sudo make install
+```
 
 Run this example script to start an internet connection sharing session over CAN
 
