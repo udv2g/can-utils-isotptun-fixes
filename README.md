@@ -2,7 +2,36 @@
 <img src="https://github.com/linux-can/can-logos/raw/master/png/SocketCAN-logo-60dpi.png" alt="SocketCAN logo"/>
 </p>
 
-### SocketCAN userspace utilities and tools (Updated for J3271 Megawatt Charging)
+### SocketCAN userspace utilities and tools
+
+#### Patches for J3271 Megawatt Charging
+
+Isotptun, as written in the comment of the source, is a proof-of-concept userspace application that uses the stable lower-level SocketCAN functions. 
+
+Changes were made in the patches to prevent crashing due to lack of event handling. 
+
+#### Setup for basic demo
+
+##### Prerequisites
+
+`sudo apt install git && sudo apt-get install autoconf
+sudo apt-get install libtool
+sudo apt install make iptables
+git clone https://github.com/udv2g/can-utils-isotptun-fixes/
+cd can-utils-isotptun-fixes
+git apply isotptun.patch
+./autogen.sh
+./configure
+make
+sudo make install`
+
+Run this example script to start an internet connection sharing session over CAN
+
+- clnttun.sh : the computer to be connected to the internet with CAN (client)
+
+- srvrtun.sh : the computer with the internet to be shared with CAN (server)
+
+#### Overview of userspace utilities and tools
 
 This repository contains some userspace utilities for Linux CAN
 subsystem (aka SocketCAN):
@@ -17,20 +46,24 @@ subsystem (aka SocketCAN):
 * cansniffer : display CAN data content differences
 
 #### CAN access via IP sockets
+
 * canlogserver : log CAN frames and serves them
 * bcmserver : interactive BCM configuration (remote/local)
 * [socketcand](https://github.com/linux-can/socketcand) : use RAW/BCM/ISO-TP sockets via TCP/IP sockets
 * [cannelloni](https://github.com/mguentner/cannelloni) : UDP/SCTP based SocketCAN tunnel
 
 #### CAN in-kernel gateway configuration
+
 * cangw : CAN gateway userspace tool for netlink configuration
 
 #### CAN bus measurement and testing
+
 * canbusload : calculate and display the CAN busload
 * can-calc-bit-timing : userspace version of in-kernel bitrate calculation
 * canfdtest : Full-duplex test program (DUT and host part)
 
 #### ISO-TP tools [ISO15765-2:2016 for Linux](https://github.com/hartkopp/can-isotp)
+
 * isotpsend : send a single ISO-TP PDU
 * isotprecv : receive ISO-TP PDU(s)
 * isotpsniffer : 'wiretap' ISO-TP PDU(s)
@@ -40,6 +73,7 @@ subsystem (aka SocketCAN):
 * isotptun : create a bi-directional IP tunnel on CAN via ISO-TP
 
 #### J1939/ISOBus tools
+
 * j1939acd : address claim daemon
 * j1939cat : take a file and send and receive it over CAN
 * j1939spy : spy on J1939 messages using SOC_J1939
@@ -50,16 +84,19 @@ Follow the link to see examples on how this tools can be used:
 [Kickstart guide to can-j1939 on linux](https://github.com/linux-can/can-utils/blob/master/can-j1939-kickstart.md)
 
 #### Log file converters
+
 * asc2log : convert ASC logfile to compact CAN frame logfile
 * log2asc : convert compact CAN frame logfile to ASC logfile
 * log2long : convert compact CAN frame representation into user readable
 
 #### Serial Line Discipline configuration (for slcan driver)
+
 * slcan_attach : userspace tool for serial line CAN interface configuration
 * slcand : daemon for serial line CAN interface configuration
 * slcanpty : creates a pty for applications using the slcan ASCII protocol
 
 #### CMake Project Generator
+
 * Place your build folder anywhere, passing CMake the path.  Relative or absolute.
 * Some examples using a build folder under the source tree root:
 * Android : ``cmake -DCMAKE_TOOLCHAIN_FILE=~/Android/Sdk/ndk-bundle/build/cmake/android.toolchain.cmake -DANDROID_PLATFORM=android-21 -DANDROID_ABI=armeabi-v7a .. && make``
@@ -72,7 +109,6 @@ Follow the link to see examples on how this tools can be used:
 
 ### Additional Information:
 
-*   [SocketCAN Documentation (Linux Kernel)](https://www.kernel.org/doc/Documentation/networking/can.txt)
-*   [Elinux.org CAN Bus Page](http://elinux.org/CAN_Bus)
-*   [Debian Package Description](https://packages.debian.org/sid/can-utils)
-
+* [SocketCAN Documentation (Linux Kernel)](https://www.kernel.org/doc/Documentation/networking/can.txt)
+* [Elinux.org CAN Bus Page](http://elinux.org/CAN_Bus)
+* [Debian Package Description](https://packages.debian.org/sid/can-utils)
